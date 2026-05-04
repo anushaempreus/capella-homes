@@ -51,8 +51,8 @@ export default function Footer() {
       {/* Bottom bar */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 80px' }}>
         <p style={{ fontFamily: SANS, fontSize: 12, color: 'rgba(255,255,255,0.2)', margin: 0 }}>
-          Copyright © 2024 Capella Homes | Site by{' '}
-          <a href="https://hypehaus.com.au" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Hype Haus</a>
+          Copyright © 2024 Capella Homes | Managed by{' '}
+          <a href="https://www.empreus.com.au" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Empreus IT Support</a>
           . All Rights Reserved.{' '}
           <a href="#" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Privacy Policy</a>
         </p>
