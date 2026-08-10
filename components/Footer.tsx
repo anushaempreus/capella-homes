@@ -1,23 +1,16 @@
-const SERIF = "var(--font-serif, 'Cormorant Garamond', serif)"
-const SANS  = "var(--font-sans, 'DM Sans', sans-serif)"
+import Image from 'next/image'
+
+const SANS = "var(--font-sans, 'Raleway', sans-serif)"
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#0a0e1a', borderTop: '1px solid rgba(255,255,255,0.05)', fontFamily: SANS }}>
+    <footer style={{ background: '#1a1a1a', borderTop: '1px solid rgba(255,255,255,0.05)', fontFamily: SANS }}>
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 24, padding: '72px 300px 56px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
 
         {/* Brand */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <svg width="38" height="38" viewBox="0 0 40 40" fill="none">
-              <polygon points="20,4 36,32 4,32" fill="none" stroke="#4dd9c0" strokeWidth="2.5" strokeLinejoin="round"/>
-              <polygon points="20,10 30,28 10,28" fill="rgba(77,217,192,0.15)" stroke="#4dd9c0" strokeWidth="1" strokeLinejoin="round"/>
-            </svg>
-            <div>
-              <div style={{ fontFamily: SANS, fontSize: 14, fontWeight: 700, color: '#fff', letterSpacing: '2px' }}>CAPELLA</div>
-              <div style={{ fontFamily: SANS, fontSize: 11, color: '#4dd9c0', letterSpacing: '2px' }}>HOMES</div>
-            </div>
-          </div>
+          <Image src="/brand/logo-white.png" alt="Capella Homes" width={141} height={38} style={{ height: 38, width: 141, flexShrink: 0 }} />
+
           <p style={{ fontFamily: SANS, fontSize: 13, color: 'rgba(255,255,255,0.38)', lineHeight: 1.8, maxWidth: 380, margin: 0 }}>
             Capella Homes, with a 20-year legacy across three generations, specialises in custom homes, renovations, and extensions in Canberra and the surrounds, ensuring unmatched excellence and integrity in every project.
           </p>
@@ -33,11 +26,11 @@ export default function Footer() {
 
         {/* Contacts */}
         <div>
-          <h4 style={{ fontFamily: SANS, fontSize: 11, fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4dd9c0', margin: '0 0 20px' }}>Contacts</h4>
+          <h4 style={{ fontFamily: SANS, fontSize: 11, fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#00b4ac', margin: '0 0 20px' }}>Contacts</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             {[
-              { href: 'mailto:info@capellahomes.com.au', text: 'info@capellahomes.com.au', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4dd9c0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> },
-              { href: 'tel:+61419989799',                text: '0419 989 799',             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4dd9c0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.12 2.2 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg> },
+              { href: 'mailto:info@capellahomes.com.au', text: 'info@capellahomes.com.au', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00b4ac" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> },
+              { href: 'tel:+61419989799',                text: '0419 989 799',             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00b4ac" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.12 2.2 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg> },
             ].map((c, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 {c.icon}

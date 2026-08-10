@@ -1,19 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
 :root {
-  --cream: #f6f1e9;
-  --cream2: #ede7db;
-  --dark: #1c2130;
-  --dark2: #252c3d;
-  --dark3: #2f3750;
-  --gold: #c49a45;
-  --gold2: #dbb060;
-  --teal: #4dd9c0;
-  --teal2: #3bc4ad;
-  --green: #2a7a5e;
+  --cream: #ffffff;
+  --cream2: #f2f2f2;
+  --dark: #1a1a1a;
+  --dark2: #2a2a2a;
+  --dark3: #2f2f2f;
+  --accent: #00b4ac;
+  --accent2: #00968f;
   --white: #ffffff;
-  --txt: #1c2130;
+  --txt: #1a1a1a;
   --txt2: #5a5f72;
   --txt3: #9298aa;
 }
@@ -21,13 +17,13 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Raleway', sans-serif;
   background: var(--cream);
   color: var(--txt);
   overflow-x: hidden;
 }
 
-.font-serif { font-family: 'Cormorant Garamond', serif; }
+.font-serif { font-family: 'Titillium Web', sans-serif; }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(30px); }
@@ -108,4 +104,119 @@ body {
 .reveal-right.visible {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 6px; border: 2px solid var(--cream); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
+
+/* ── Scroll progress bar ── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--accent2), var(--accent));
+  z-index: 60;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px rgba(0,180,172,0.6);
+}
+
+/* ── Spotlight (cursor-reactive glow) ── */
+.spotlight-wrap { --sx: 50%; --sy: 50%; position: relative; }
+.spotlight-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(560px circle at var(--sx) var(--sy), rgba(0,180,172,0.14), transparent 68%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.spotlight-wrap:hover::after { opacity: 1; }
+
+/* ── Magnetic buttons ── */
+.magnetic-btn {
+  transition: transform 0.25s cubic-bezier(0.33,1,0.68,1);
+  will-change: transform;
+}
+
+/* ── Button shine sweep ── */
+.shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,0.55), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.65s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+.shine:hover::before { left: 130%; }
+
+/* ── Back to top ── */
+.back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 52px;
+  height: 52px;
+  z-index: 55;
+  opacity: 0;
+  transform: translateY(16px) scale(0.85);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.back-to-top.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+
+/* ── Noise / grain texture for depth ── */
+.grain { position: relative; }
+.grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Count-up number pop ── */
+@keyframes numberPop {
+  0% { opacity: 0; transform: translateY(10px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.counter-value { animation: numberPop 0.5s ease; }
+
+.nav-logo:hover { transform: scale(1.04); }
+
+/* ── Nav link underline grow ── */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-wrap::after, .back-to-top, .magnetic-btn, .shine::before { transition: none !important; }
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
 }

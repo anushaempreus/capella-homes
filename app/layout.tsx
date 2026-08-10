@@ -1,17 +1,19 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import { Titillium_Web, Raleway } from 'next/font/google'
 import './globals.css'
+import ScrollProgress from '../components/ScrollProgress'
+import BackToTop from '../components/BackToTop'
 
-const cormorant = Cormorant_Garamond({
+const titillium = Titillium_Web({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['300', '400', '600', '700', '900'],
   style: ['normal', 'italic'],
   variable: '--font-serif',
 })
 
-const dmSans = DM_Sans({
+const raleway = Raleway({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-sans',
 })
 
@@ -22,8 +24,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
-      <body style={{ fontFamily: 'var(--font-sans)' }}>{children}</body>
+    <html lang="en" className={`${titillium.variable} ${raleway.variable}`}>
+      <body style={{ fontFamily: 'var(--font-sans)' }}>
+        <ScrollProgress />
+        {children}
+        <BackToTop />
+      </body>
     </html>
   )
 }

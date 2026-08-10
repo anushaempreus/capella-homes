@@ -1,10 +1,11 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 
-const SERIF = "var(--font-serif, 'Cormorant Garamond', serif)"
-const SANS  = "var(--font-sans, 'DM Sans', sans-serif)"
+const SERIF = "var(--font-serif, 'Titillium Web', serif)"
+const SANS  = "var(--font-sans, 'Raleway', sans-serif)"
 
 const projects = [
   {
@@ -12,32 +13,32 @@ const projects = [
     category: 'Residential',
     location: 'Pearce, ACT',
     desc: 'A stunning modern residential build in the heart of Pearce, designed to maximise natural light and create seamless indoor-outdoor living.',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop',
-    accent: '#c49a45',
+    image: '/images/image2-homev1.jpg',
+    accent: '#00b4ac',
   },
   {
     name: 'Charity House',
     category: 'Residential',
     location: 'Canberra, ACT',
     desc: 'A beautiful charitable residential project showcasing commitment to creating meaningful spaces for the community.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80&fit=crop',
-    accent: '#4dd9c0',
+    image: '/images/image3-home1.jpg',
+    accent: '#00b4ac',
   },
   {
     name: "O'Connor",
     category: 'Residential',
     location: "O'Connor, ACT",
     desc: "A carefully crafted home extension and renovation in O'Connor, blending contemporary design with the suburb's established character.",
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80&fit=crop',
-    accent: '#AFA9EC',
+    image: '/images/grevillia-33.jpg',
+    accent: '#00b4ac',
   },
   {
     name: 'Garran',
     category: 'Residential',
     location: 'Garran, ACT',
     desc: 'A premium new build in Garran featuring high-end finishes, open plan living, and expertly crafted spaces for modern family life.',
-    image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1200&q=80&fit=crop',
-    accent: '#EF9F27',
+    image: '/images/garran-35.jpg',
+    accent: '#00b4ac',
   },
 ]
 
@@ -103,20 +104,16 @@ function Reveal({
   )
 }
 
-export default function ProjectsPage() {
-  const [active, setActive] = useState('All')
-  const [hovered, setHovered] = useState<number | null>(null)
-
-  const filtered = active === 'All' ? projects : projects.filter(p => p.category === active)
-
-  const CardInner = ({
-    p, i, height, titleSize,
-  }: {
-    p: typeof projects[0]; i: number; height: number; titleSize: number
-  }) => (
+function CardInner({
+  p, i, height, titleSize, hovered, onHover, onLeave,
+}: {
+  p: typeof projects[0]; i: number; height: number; titleSize: number
+  hovered: number | null; onHover: (i: number) => void; onLeave: () => void
+}) {
+  return (
     <div
-      onMouseEnter={() => setHovered(i)}
-      onMouseLeave={() => setHovered(null)}
+      onMouseEnter={() => onHover(i)}
+      onMouseLeave={onLeave}
       style={{
         position: 'relative', overflow: 'hidden', borderRadius: 16, height, cursor: 'pointer',
         border: '1px solid rgba(255,255,255,0.04)',
@@ -137,8 +134,8 @@ export default function ProjectsPage() {
       <div style={{
         position: 'absolute', inset: 0,
         background: hovered === i
-          ? 'linear-gradient(to top, rgba(4,7,18,0.96) 0%, rgba(4,7,18,0.55) 55%, rgba(4,7,18,0.15) 100%)'
-          : 'linear-gradient(to top, rgba(4,7,18,0.92) 0%, rgba(4,7,18,0.4) 50%, rgba(4,7,18,0.1) 100%)',
+          ? 'linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 100%)'
+          : 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%)',
         transition: 'background 0.4s ease',
       }}/>
 
@@ -198,13 +195,13 @@ export default function ProjectsPage() {
             width: 40, height: 40, borderRadius: '50%',
             display: 'grid', placeItems: 'center',
             flexShrink: 0, marginLeft: 16,
-            background: hovered === i ? '#4dd9c0' : 'transparent',
-            border: `1px solid ${hovered === i ? '#4dd9c0' : 'rgba(255,255,255,0.2)'}`,
+            background: hovered === i ? '#00b4ac' : 'transparent',
+            border: `1px solid ${hovered === i ? '#00b4ac' : 'rgba(255,255,255,0.2)'}`,
             opacity: hovered === i ? 1 : 0,
             transform: hovered === i ? 'translateY(0)' : 'translateY(8px)',
             transition: 'all 0.3s ease',
           }}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#050810" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M3 7h8M8 4l3 3-3 3"/>
             </svg>
           </div>
@@ -212,6 +209,13 @@ export default function ProjectsPage() {
       </div>
     </div>
   )
+}
+
+export default function ProjectsPage() {
+  const [active, setActive] = useState('All')
+  const [hovered, setHovered] = useState<number | null>(null)
+
+  const filtered = active === 'All' ? projects : projects.filter(p => p.category === active)
 
   return (
     <main style={{ fontFamily: SANS }}>
@@ -221,16 +225,16 @@ export default function ProjectsPage() {
       <section style={{
         position: 'relative', overflow: 'hidden', height: 420,
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        background: '#050810',
+        background: '#1a1a1a',
       }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80&fit=crop)', backgroundSize: 'cover', backgroundPosition: 'center 40%' }}/>
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(4,7,18,0.65)' }}/>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/mg-1313.jpg)', backgroundSize: 'cover', backgroundPosition: 'center 40%' }}/>
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.65)' }}/>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)', backgroundSize: '80px 80px', pointerEvents: 'none' }}/>
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 120, background: 'linear-gradient(to top, #0a0e1a, transparent)', zIndex: 2 }}/>
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 120, background: 'linear-gradient(to top, #1a1a1a, transparent)', zIndex: 2 }}/>
         <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <h1 style={{ fontFamily: SERIF, fontSize: 'clamp(44px, 6vw, 80px)', fontWeight: 400, color: '#fff', margin: '0 0 20px', letterSpacing: '-1px', lineHeight: 1.0 }}>Projects</h1>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
-            <a href="/" style={{ fontFamily: SANS, fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 500 }}>Home</a>
+            <Link href="/" style={{ fontFamily: SANS, fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 500 }}>Home</Link>
             <div style={{ display: 'flex', gap: 4 }}>
               <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'rgba(255,255,255,0.5)' }}/>
               <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'rgba(255,255,255,0.5)' }}/>
@@ -241,7 +245,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* ── PORTFOLIO ── */}
-      <section style={{ background: '#0a0e1a', padding: '72px 80px 96px' }}>
+      <section style={{ background: '#1a1a1a', padding: '72px 80px 96px' }}>
 
         {/* Header + filters */}
         <Reveal direction="up">
@@ -261,7 +265,7 @@ export default function ProjectsPage() {
                   padding: '8px 18px', borderRadius: 7, border: 'none',
                   cursor: 'pointer', letterSpacing: '0.5px',
                   background: active === f ? '#ffffff' : 'transparent',
-                  color: active === f ? '#1c2130' : 'rgba(255,255,255,0.4)',
+                  color: active === f ? '#1a1a1a' : 'rgba(255,255,255,0.4)',
                   transition: 'all 0.2s ease',
                 }}>
                   {f}{f !== 'All' && <span style={{ marginLeft: 6, opacity: 0.5, fontSize: 10 }}>{projects.filter(p => p.category === f).length}</span>}
@@ -275,7 +279,7 @@ export default function ProjectsPage() {
         {filtered.length > 0 && (
           <Reveal direction="up" delay={0.1}>
             <div style={{ marginBottom: 12 }}>
-              <CardInner p={filtered[0]} i={0} height={420} titleSize={42} />
+              <CardInner p={filtered[0]} i={0} height={420} titleSize={42} hovered={hovered} onHover={setHovered} onLeave={() => setHovered(null)} />
             </div>
           </Reveal>
         )}
@@ -284,10 +288,10 @@ export default function ProjectsPage() {
         {filtered.length > 2 && (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
             <Reveal direction="left" delay={0.1}>
-              <CardInner p={filtered[1]} i={1} height={320} titleSize={28} />
+              <CardInner p={filtered[1]} i={1} height={320} titleSize={28} hovered={hovered} onHover={setHovered} onLeave={() => setHovered(null)} />
             </Reveal>
             <Reveal direction="right" delay={0.2}>
-              <CardInner p={filtered[2]} i={2} height={320} titleSize={28} />
+              <CardInner p={filtered[2]} i={2} height={320} titleSize={28} hovered={hovered} onHover={setHovered} onLeave={() => setHovered(null)} />
             </Reveal>
           </div>
         )}
@@ -296,7 +300,7 @@ export default function ProjectsPage() {
         {filtered.slice(3).map((p, i) => (
           <Reveal key={p.name} direction="up" delay={0.1}>
             <div style={{ marginBottom: 12 }}>
-              <CardInner p={p} i={i + 3} height={280} titleSize={28} />
+              <CardInner p={p} i={i + 3} height={280} titleSize={28} hovered={hovered} onHover={setHovered} onLeave={() => setHovered(null)} />
             </div>
           </Reveal>
         ))}
@@ -314,7 +318,7 @@ export default function ProjectsPage() {
                 textAlign: 'center', padding: '24px 20px',
                 borderRight: i < 3 ? '1px solid rgba(255,255,255,0.06)' : 'none',
               }}>
-                <div style={{ fontFamily: SERIF, fontSize: 32, fontWeight: 700, color: '#4dd9c0', lineHeight: 1, marginBottom: 8 }}>{s.n}</div>
+                <div style={{ fontFamily: SERIF, fontSize: 32, fontWeight: 700, color: '#00b4ac', lineHeight: 1, marginBottom: 8 }}>{s.n}</div>
                 <div style={{ fontFamily: SANS, fontSize: 11, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.5px', textTransform: 'uppercase' }}>{s.l}</div>
               </div>
             ))}
@@ -323,7 +327,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* Separator */}
-      <div style={{ height: 6, background: 'linear-gradient(to right, #0a0e1a, #4dd9c0 40%, #4dd9c0 60%, #0a0e1a)' }}/>
+      <div style={{ height: 6, background: 'linear-gradient(to right, #1a1a1a, #00b4ac 40%, #00b4ac 60%, #1a1a1a)' }}/>
 
       <Footer />
     </main>
