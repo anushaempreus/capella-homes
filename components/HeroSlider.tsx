@@ -116,14 +116,14 @@ export default function HeroSlider() {
           <div style={{ width: 20, height: 1, background: 'rgba(255,255,255,0.15)' }}/>
         </div>
 
-        <div className="mb-8" style={{ maxWidth: 700 }}>
-          <div style={{ fontFamily: SERIF, fontSize: 'clamp(48px, 7vw, 96px)', fontWeight: 300, color: 'rgba(255,255,255,0.85)', letterSpacing: '-1px', lineHeight: 1.0 }}>
+        <h1 className="mb-8" style={{ maxWidth: 700, margin: '0 0 32px', fontWeight: 'inherit' }}>
+          <span style={{ display: 'block', fontFamily: SERIF, fontSize: 'clamp(48px, 7vw, 96px)', fontWeight: 300, color: 'rgba(255,255,255,0.85)', letterSpacing: '-1px', lineHeight: 1.0 }}>
             {slide.heading[0]}
-          </div>
-          <div style={{ fontFamily: SERIF, fontSize: 'clamp(48px, 7vw, 96px)', fontWeight: 700, color: '#fff', letterSpacing: '-1px', lineHeight: 1.0 }}>
+          </span>
+          <span style={{ display: 'block', fontFamily: SERIF, fontSize: 'clamp(48px, 7vw, 96px)', fontWeight: 700, color: '#fff', letterSpacing: '-1px', lineHeight: 1.0 }}>
             {slide.heading[1]}
-          </div>
-        </div>
+          </span>
+        </h1>
 
         <div className="flex items-center gap-3 mb-7">
           <div style={{ width: 48, height: 1.5, background: ACCENT, borderRadius: 1, opacity: 0.7 }}/>

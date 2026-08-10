@@ -42,7 +42,7 @@ export default function Values() {
 
             {/* Circle image */}
             <div style={{ marginTop: 40, width: 200, height: 200, borderRadius: '50%', overflow: 'hidden', border: '4px solid #fff', boxShadow: '0 16px 48px rgba(26,26,26,0.1)', position: 'relative' }}>
-              <Image src="/images/dji-0034.jpg" alt="" fill sizes="200px" style={{ objectFit: 'cover' }}/>
+              <Image src="/images/dji-0034.jpg" alt="A Capella Homes custom-built residence in Canberra" fill sizes="200px" style={{ objectFit: 'cover' }}/>
             </div>
           </div>
         </Reveal>
