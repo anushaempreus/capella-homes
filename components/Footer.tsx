@@ -1,4 +1,6 @@
+'use client'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const SANS = "var(--font-sans, 'Raleway', sans-serif)"
 
@@ -44,12 +46,16 @@ export default function Footer() {
       {/* Bottom bar */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 80px' }}>
         <p style={{ fontFamily: SANS, fontSize: 12, color: 'rgba(255,255,255,0.2)', margin: 0 }}>
-          Copyright © 2024 Capella Homes | Managed by{' '}
+          Copyright © {new Date().getFullYear()} Capella Homes | Managed by{' '}
           <a href="https://www.empreus.com.au" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Empreus IT Support</a>
           . All Rights Reserved.{' '}
-          <a href="#" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Privacy Policy</a>
+          <Link href="/privacy-policy" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Privacy Policy</Link>
         </p>
-        <a href="#" style={{ fontFamily: SANS, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, fontWeight: 600, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', textDecoration: 'none' }}>
+        <a
+          href="#top"
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+          style={{ fontFamily: SANS, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, fontWeight: 600, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', textDecoration: 'none' }}
+        >
           Back to top
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
         </a>
